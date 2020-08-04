@@ -2,6 +2,7 @@
 #include <vector>
 #include <numeric>
 #include <cmath>
+#include <iostream>
 using std::vector;
 using std::abs;
 /**
@@ -70,7 +71,7 @@ void PID::Twiddle() {
       }
     }
   }
-  // std::cout << Kp << " " << Ki << " " << Kd << std::endl;
+  std::cout << Kp << " " << Ki << " " << Kd << std::endl;
   
 
 }
