@@ -31,7 +31,6 @@ class PID {
    */
   double TotalError();
   
-  void Twiddle();
 
  private:
   /**
@@ -47,7 +46,7 @@ class PID {
   double Kp;
   double Ki;
   double Kd;
-  double best_error;
+
 };
 
 #endif  // PID_H

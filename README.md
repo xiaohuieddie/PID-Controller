@@ -93,6 +93,18 @@ that's just a guess.
 One last note here: regardless of the IDE used, every submitted project must
 still be compilable with cmake and make./
 
+## Rubric Points
+### Describe the effect each of the P, I, D components had in your implementation.
+
+ - **P component:** the P, or "proportional", component had the most directly observable effect on the car’s behaviour. It causes the car to steer proportional (and opposite) to the car’s distance from the lane center(CTE) - if the car is far to the right it steers hard to the left, if it’s slightly to the left it steers slightly to the right.
+ - **D component:** It’s the differential component of the controller which helps to take temporal derivative of error. This means when the car turned enough to reduce the error, it will help not to overshoot through the x axis. In other words, the D, or "differential", component counteracts the P component’s tendency to ring and overshoot the center line. A properly tuned D parameter will cause the car to approach the center line smoothly without ringing.
+ - **I component**: It’s the integral or sum of error to deal with systematic biases. In other words, the I, or "integral", component counteracts a bias in the CTE which prevents the P-D controller from reaching the center line. This bias can take several forms, such as a steering drift , but I believe that in this particular implementation the I component particularly serves to reduce the CTE around curves.
+
+### Describe how the final hyperparameters were chosen.
+
+ - **Finding initial value for Kp, Ki, Kd :** The intial value for Kp, Ki, Kd selected using trail and error method. It is a simple method of PID controller tuning. In this method, first we have to set Ki and Kd values to zero and increase proportional term (Kp) until system reaches to oscillating behaviour. Then Kd was tuned to reduced oscillation and then Ki to reduce steady-state error.
+ - **Twiddle:** Parameter optimisation was done manually and using the Twiddle algorithm. I followed the pseudocode from the class and translated it to C++ line by line making sure I initialized the coefficients within reasonable ranges. Twiddle contributed to the further tweaking of the coefficients. The optimized PID values I found is {0.2, 0.00031, 3.0}.
+
 ## How to write a README
 A well written README file can enhance your project and portfolio.  Develop your abilities to create professional README files by completing [this free course](https://www.udacity.com/course/writing-readmes--ud777).
 
